@@ -1,0 +1,16 @@
+@import '../../../style/mixins/index';
+
+@message-prefix-cls: ~'@{vts-prefix}-message';
+
+.@{message-prefix-cls}-rtl {
+  direction: rtl;
+
+  span {
+    direction: rtl;
+  }
+
+  .@{iconfont-css-prefix} {
+    margin-right: 0;
+    margin-left: 8px;
+  }
+}

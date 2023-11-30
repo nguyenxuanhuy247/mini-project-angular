@@ -1,0 +1,10 @@
+@import '../../../style/mixins/index';
+@import '../../checkbox/style/mixin';
+@import './mixin';
+
+@tree-prefix-cls: ~'@{vts-prefix}-tree';
+@tree-node-prefix-cls: ~'@{tree-prefix-cls}-treenode';
+
+.vtsCheckboxFn(@checkbox-prefix-cls: ~'@{vts-prefix}-tree-checkbox');
+
+.vtsTreeFn(@tree-prefix-cls);

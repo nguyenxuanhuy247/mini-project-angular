@@ -1,0 +1,120 @@
+<button vts-button vtsSize="md" vtsType="primary" (click)="open()">
+  <i vts-icon vtsType="PersonAdd:vts"></i>
+  Thêm thành viên mới
+</button>
+
+<vts-drawer
+  [vtsBodyStyle]="{ overflow: 'auto' }"
+  [vtsMaskClosable]="false"
+  [vtsWidth]="width"
+  [vtsVisible]="visible"
+  vtsTitle="Thêm thành viên mới"
+  [vtsFooter]="footerTpl"
+  (vtsOnClose)="close()"
+  vtsClosable
+  vtsWrapClassName="container"
+>
+  <form vts-form *vtsDrawerContent [formGroup]="memberForm">
+    <vts-form-item>
+      <vts-form-label class="label" vtsFor="name">Họ và tên</vts-form-label>
+      <vts-form-control [vtsErrorTip]="errorName">
+        <input
+          vts-input
+          placeholder="Nhập họ và tên"
+          id="name"
+          formControlName="name"
+        />
+        <ng-template #errorName let-control>
+          <ng-container *ngIf="control.hasError('required')">
+            Vui lòng nhập Họ và tên!
+          </ng-container>
+        </ng-template>
+      </vts-form-control>
+    </vts-form-item>
+
+    <vts-form-item>
+      <vts-form-label class="label" vtsFor="email">Email</vts-form-label>
+      <vts-form-control [vtsErrorTip]="errorEmail">
+        <input
+          type="email"
+          vts-input
+          placeholder="Nhập email"
+          id="email"
+          formControlName="email"
+        />
+
+        <ng-template #errorEmail let-control>
+          <ng-container *ngIf="control.hasError('required')">
+            Vui lòng nhập địa chỉ email
+          </ng-container>
+          <ng-container *ngIf="control.hasError('email')">
+            Định dạng email không đúng
+          </ng-container>
+        </ng-template>
+      </vts-form-control>
+    </vts-form-item>
+
+    <vts-form-item>
+      <vts-form-label class="label" vtsFor="address">Địa chỉ</vts-form-label>
+      <vts-form-control [vtsErrorTip]="errorAddress">
+        <input
+          type="text"
+          vts-input
+          placeholder="Nhập địa chỉ"
+          id="address"
+          formControlName="address"
+        />
+
+        <ng-template #errorAddress let-control>
+          <ng-container *ngIf="control.hasError('required')">
+            Vui lòng nhập địa chỉ
+          </ng-container>
+        </ng-template>
+      </vts-form-control>
+    </vts-form-item>
+
+    <vts-form-item>
+      <vts-form-label class="label marriage-status" vtsFor="marriage-status"
+        >Tình trạng hôn nhân</vts-form-label
+      >
+      <vts-form-control [vtsErrorTip]="errorMarriageStatus">
+        <vts-radio-group
+          name="marriagStatus"
+          id="marriage-status"
+          formControlName="marriageStatus"
+        >
+          <vts-space vtsPreset="2" vtsDirection="horizontal">
+            <label *vtsSpaceItem vts-radio vtsValue="Single">Độc thân</label>
+            <label *vtsSpaceItem vts-radio vtsValue="Married">Đã kết hôn</label>
+          </vts-space>
+        </vts-radio-group>
+
+        <ng-template #errorMarriageStatus let-control>
+          <ng-container *ngIf="control.hasError('required')">
+            Vui lòng nhập tình trạng hôn nhân
+          </ng-container>
+        </ng-template>
+      </vts-form-control>
+    </vts-form-item>
+  </form>
+
+  <ng-template #footerTpl>
+    <vts-space [vtsPreset]="3" vtsAlign="center" vtsJustify="end" class="">
+      <button *vtsSpaceItem vts-button vtsType="default" (click)="close()">
+        Hủy bỏ
+      </button>
+      <button
+        *vtsSpaceItem
+        vts-button
+        vtsType="primary"
+        (click)="onSubmit()"
+        style="margin-right: 8px"
+      >
+        {{ memberData ? "Chỉnh sửa" : "Thêm mới" }}
+      </button>
+    </vts-space>
+  </ng-template>
+</vts-drawer>
+
+<!-- Spinner -->
+<vts-spin-inside [width]="width" [isSpinning]="isSpinning"></vts-spin-inside>

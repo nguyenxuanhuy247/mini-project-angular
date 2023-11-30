@@ -1,0 +1,205 @@
+@import '../../../style/mixins/index';
+@import './customize.less';
+
+@toast-prefix-cls: ~'@{vts-prefix}-toast';
+
+.@{toast-prefix-cls} {
+  .reset-component();
+  
+  width: @toast-width;
+  position: fixed;
+  z-index: @zindex-toast;
+  margin-right: @toast-margin-edge;
+
+  &-topLeft,
+  &-bottomLeft {
+    margin-right: 0;
+    margin-left: @toast-margin-edge;
+
+    .@{toast-prefix-cls}-fade-enter.@{toast-prefix-cls}-fade-enter-active,
+    .@{toast-prefix-cls}-fade-appear.@{toast-prefix-cls}-fade-appear-active {
+      animation-name: ToastLeftFadeIn;
+    }
+  }
+
+  &-close-icon {
+    font-size: @font-size-base;
+    cursor: pointer;
+  }
+
+  &-hook-holder,
+  &-notice {
+    position: relative;
+    width: @toast-width;
+    max-width: ~'calc(100vw - @{toast-margin-edge} * 2)';
+    margin-bottom: @toast-margin-bottom;
+    margin-left: auto;
+    overflow: hidden;
+    word-wrap: break-word;
+    border-radius: @border-radius-base;
+
+    .@{toast-prefix-cls}-topLeft &,
+    .@{toast-prefix-cls}-bottomLeft & {
+      margin-right: auto;
+      margin-left: 0;
+    }
+  }
+
+  &-hook-holder > &-notice {
+    margin-bottom: 0;
+    box-shadow: none;
+  }
+
+  &-notice {
+    &-message {
+      margin-bottom: 8px;
+      color: @heading-color;
+      font-size: @font-size-lg;
+      line-height: 24px;
+
+      &-single-line-auto-margin {
+        display: block;
+        width: ~'calc(@{toast-width} - @{toast-padding-horizontal} * 2 - 24px - 48px - 100%)';
+        max-width: 4px;
+        background-color: transparent;
+        pointer-events: none;
+        &::before {
+          display: block;
+          content: '';
+        }
+      }
+    }
+
+    &-description {
+      font-size: @font-size-base;
+    }
+
+    &-closable &-message {
+      padding-right: 24px;
+    }
+
+    &-with-icon &-message {
+      margin-bottom: 4px;
+      margin-left: 48px;
+      font-size: @font-size-lg;
+    }
+
+    &-with-icon &-description {
+      margin-left: 48px;
+      font-size: @font-size-base;
+    }
+
+    &-icon {
+      position: absolute;
+      margin-left: 4px;
+      font-size: 24px;
+      line-height: 24px;
+    }
+
+    .@{iconfont-css-prefix}&-icon {
+      &-success {
+        color: @success-color;
+      }
+      &-info {
+        color: @info-color;
+      }
+      &-warning {
+        color: @warning-color;
+      }
+      &-error {
+        color: @error-color;
+      }
+    }
+
+    &-close {
+      position: absolute;
+      top: 16px;
+      right: 22px;
+      color: @text-color-secondary;
+      outline: none;
+
+      &:hover {
+        & when (@theme = dark) {
+          color: fade(@white, 85%);
+        }
+        & when not (@theme = dark) {
+          color: shade(@text-color-secondary, 40%);
+        }
+      }
+    }
+
+    &-btn {
+      float: right;
+      margin-top: 16px;
+    }
+  }
+
+  .toast-fade-effect {
+    animation-duration: 0.24s;
+    animation-timing-function: @ease-in-out;
+    animation-fill-mode: both;
+  }
+
+  &-fade-enter,
+  &-fade-appear {
+    opacity: 0;
+    .toast-fade-effect();
+
+    animation-play-state: paused;
+  }
+
+  &-fade-leave {
+    .toast-fade-effect();
+
+    animation-duration: 0.2s;
+    animation-play-state: paused;
+  }
+
+  &-fade-enter&-fade-enter-active,
+  &-fade-appear&-fade-appear-active {
+    animation-name: ToastFadeIn;
+    animation-play-state: running;
+  }
+
+  &-fade-leave&-fade-leave-active {
+    animation-name: ToastFadeOut;
+    animation-play-state: running;
+  }
+}
+
+@keyframes ToastFadeIn {
+  0% {
+    left: @toast-width;
+    opacity: 0;
+  }
+  100% {
+    left: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes ToastLeftFadeIn {
+  0% {
+    right: @toast-width;
+    opacity: 0;
+  }
+  100% {
+    right: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes ToastFadeOut {
+  0% {
+    max-height: 150px;
+    margin-bottom: @toast-margin-bottom;
+    opacity: 1;
+  }
+  100% {
+    max-height: 0;
+    margin-bottom: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    opacity: 0;
+  }
+}

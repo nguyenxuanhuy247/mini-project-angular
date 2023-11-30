@@ -1,0 +1,125 @@
+@import '../../../style/themes/default';
+@import '../../../style/mixins/index';
+
+@result-prefix-cls: ~'@{vts-prefix}-result';
+
+.@{result-prefix-cls} {
+  padding: @result-padding;
+  display: flex;
+  flex-direction: column;
+
+  @result-403: ~'@{result-prefix-cls}-403';
+  @result-404: ~'@{result-prefix-cls}-404';
+  @result-500: ~'@{result-prefix-cls}-500';
+  @result-bad-connection: ~'@{result-prefix-cls}-bad-connection';
+
+  &-icon {
+    margin-bottom: @result-default-margin;
+    text-align: center;
+
+    svg {
+      max-width: 90%;
+    }
+
+    .@{result-403} & {
+      color: @result-404-icon-current-color;
+    }
+
+    .@{result-404} & {
+      color: @result-404-icon-current-color;
+    }
+
+    .@{result-500} & {
+      color: @result-500-icon-current-color;
+    }
+
+    .@{result-bad-connection} & {
+      color: @result-bad-connection-icon-current-color;
+    }
+  }
+
+  &-title {
+    color: @text-color;
+    font-size: @result-title-font-size;
+    font-weight: @result-title-font-weight;
+    line-height: 1;
+    text-align: center;
+    margin-top: @result-default-margin * 2;
+    margin-bottom: @result-default-margin;
+  }
+
+  &-subtitle {
+    color: @text-color;
+    font-size: @result-subtitle-font-size;
+    font-weight: @result-subtitle-font-weight;
+    line-height: 1;
+    text-align: center;
+    margin-top: @result-default-margin;
+    margin-bottom: @result-default-margin;
+  }
+  
+  &-content {
+    color: @text-color;
+    font-size: @result-content-font-size;
+    font-weight: @result-content-font-weight;
+    line-height: 1;
+    margin-top: @result-default-margin * 2;
+    margin-bottom: @result-default-margin;
+    background: @result-content-background;
+    padding: @result-content-padding;
+  }
+
+  &-action {
+    text-align: center;
+    margin-top: @result-default-margin * 2;
+    margin-bottom: @result-default-margin * 4;
+  }
+
+  &-layout {
+    &-icon-first {
+      > .@{result-prefix-cls}-icon {
+        order: 0;
+      }
+      
+      > .@{result-prefix-cls}-title {
+        order: 1;
+      }
+
+      > .@{result-prefix-cls}-subtitle {
+        order: 2;
+      }
+
+      > .@{result-prefix-cls}-content {
+        order: 3;
+      }
+
+      > .@{result-prefix-cls}-action {
+        order: 4;
+      }
+    }
+
+    &-content-first {
+      > .@{result-prefix-cls}-icon {
+        order: 4;
+      }
+      
+      > .@{result-prefix-cls}-title {
+        order: 0;
+      }
+
+      > .@{result-prefix-cls}-subtitle {
+        order: 1;
+      }
+
+      > .@{result-prefix-cls}-content {
+        order: 2;
+      }
+
+      > .@{result-prefix-cls}-action {
+        order: 3;
+      }
+    }
+  }
+}
+
+@import './rtl';

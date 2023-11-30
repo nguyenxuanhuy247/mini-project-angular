@@ -1,0 +1,81 @@
+:host {
+  --header-height: 56px;
+
+  min-width: 900px;
+  display: block;
+
+  .header-container {
+    align-items: center;
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+
+    .header {
+      flex: 1;
+      align-items: center;
+      display: flex;
+
+      .logo-link {
+        display: flex;
+        align-items: center;
+
+        .logo {
+          width: 120px;
+          height: 48px;
+          max-height: 100%;
+          float: left;
+          margin-right: 24px;
+        }
+      }
+    }
+
+    .link {
+      display: block;
+    }
+
+    .action-buttons,
+    .welcomed {
+      position: absolute;
+      height: var(--header-height);
+      padding-right: 24px;
+      float: right;
+      z-index: 20;
+
+      .btn {
+        width: 120px;
+      }
+    }
+
+    .welcomed {
+      margin-right: 24px;
+      display: grid;
+      place-items: center;
+      font-size: 1.8rem;
+      font-weight: 600;
+      background-color: #192e35;
+      padding: 0 20px;
+      color: #fff;
+    }
+  }
+
+  .content {
+    margin-top: var(--header-height);
+    background: #fafafa;
+
+    .inner-layout {
+      box-shadow: 0px 0 8px 2px rgb(0 0 0 / 20%);
+    }
+  }
+}
+
+// Override VTS KIT
+.vts-layout-sider .vts-menu {
+  height: 100%;
+}
+
+vts-layout {
+  min-height: calc(100vh - 56px - 48px - 39px);
+}

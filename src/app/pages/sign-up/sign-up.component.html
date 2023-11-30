@@ -1,0 +1,151 @@
+<div class="sign-up">
+  <form
+    vts-form
+    [formGroup]="signupForm"
+    (ngSubmit)="submitForm()"
+    vtsLayout="vertical"
+    class="form"
+  >
+    <a routerLink="/" class="logo-link">
+      <img vts-image appLogoSrc="160px" alt="Viettel Solutions Logo" />
+    </a>
+
+    <vts-form-item>
+      <vts-form-label vtsFor="email">Email</vts-form-label>
+      <vts-form-control [vtsErrorTip]="errorEmail">
+        <input
+          vts-input
+          formControlName="email"
+          id="email"
+          placeholder="Nhập email"
+        />
+
+        <ng-template #errorEmail let-control>
+          <ng-container *ngIf="control.hasError('required')">
+            Vui lòng nhập địa chỉ email!
+          </ng-container>
+          <ng-container *ngIf="control.hasError('email')">
+            Định dạng email không đúng!
+          </ng-container>
+        </ng-template>
+      </vts-form-control>
+    </vts-form-item>
+
+    <vts-form-item>
+      <vts-form-label vtsFor="password"> Mật khẩu </vts-form-label>
+      <vts-form-control [vtsErrorTip]="errorPassword">
+        <vts-input-group [vtsSuffix]="eyePassword">
+          <input
+            vts-input
+            [type]="inputPasswordType"
+            id="password"
+            formControlName="password"
+            placeholder="Nhập mật khẩu"
+          />
+        </vts-input-group>
+
+        <!-- Error Message Password -->
+        <ng-template #errorPassword let-control>
+          <ng-container *ngIf="control.hasError('required')">
+            Vui lòng nhập mật khẩu
+          </ng-container>
+          <ng-container *ngIf="control.hasError('minlength')">
+            Mật khẩu phải có tối thiểu 6 kí tự</ng-container
+          ><ng-container *ngIf="control.hasError('maxlength')">
+            Mật khẩu chỉ có tối đa 25 kí tự</ng-container
+          ><ng-container
+            *ngIf="
+              !control.hasError('minlength') &&
+              !control.hasError('maxlength') &&
+              control.hasError('pattern')
+            "
+          >
+            Mật khẩu phải chứa ít nhất 1 chữ cái viết hoa và 1 chữ số
+          </ng-container>
+        </ng-template>
+
+        <!-- Show / Hide Password Icon Eye -->
+        <ng-template #eyePassword>
+          <ng-container *ngIf="isShowPassword"
+            ><i
+              vts-icon
+              vtsType="Eye:vts"
+              (click)="onTogglePassword()"
+              class="eye"
+            ></i
+          ></ng-container>
+          <ng-container *ngIf="!isShowPassword"
+            ><i
+              vts-icon
+              vtsType="EyeOff:vts"
+              (click)="onTogglePassword()"
+              class="eye"
+              style="color: #666"
+            ></i
+          ></ng-container>
+        </ng-template>
+      </vts-form-control>
+    </vts-form-item>
+
+    <vts-form-item>
+      <vts-form-label vtsFor="checkPassword">
+        Xác nhận mật khẩu
+      </vts-form-label>
+      <vts-form-control [vtsErrorTip]="errorCheckPassword">
+        <vts-input-group [vtsSuffix]="eyeCheckPassword">
+          <input
+            vts-input
+            [type]="inputCheckPasswordType"
+            placeholder="Nhập mật khẩu xác nhận"
+            formControlName="checkPassword"
+            id="checkPassword"
+          />
+        </vts-input-group>
+
+        <!-- Error Message Check Password -->
+        <ng-template #errorCheckPassword let-control>
+          <ng-container *ngIf="control.hasError('required')">
+            Vui lòng nhập mật khẩu xác nhận
+          </ng-container>
+          <ng-container *ngIf="control.hasError('confirm')">
+            Mật khẩu xác nhận không trùng khớp
+          </ng-container>
+        </ng-template>
+
+        <!-- Show / Hide Password Icon Eye -->
+        <ng-template #eyeCheckPassword>
+          <ng-container *ngIf="isShowCheckPassword"
+            ><i
+              vts-icon
+              vtsType="Eye:vts"
+              (click)="onToggleCheckPassword()"
+              class="eye"
+            ></i
+          ></ng-container>
+          <ng-container *ngIf="!isShowCheckPassword"
+            ><i
+              vts-icon
+              vtsType="EyeOff:vts"
+              (click)="onToggleCheckPassword()"
+              class="eye"
+              style="color: #666"
+            ></i
+          ></ng-container>
+        </ng-template>
+      </vts-form-control>
+    </vts-form-item>
+
+    <vts-form-item vts-row class="sign-up-button-container">
+      <vts-form-control>
+        <button vts-button vtsType="primary" vtsBlock>Đăng ký</button>
+      </vts-form-control>
+    </vts-form-item>
+
+    <div vts-row vtsGutter="8">
+      <span vts-col vts-typography vtsType="body1">Bạn đã có tài khoản?</span>
+      <a vts-col vts-button vtsType="link" routerLink="/log-in">Đăng nhập!</a>
+    </div>
+  </form>
+</div>
+
+<vts-spin-basic [isSpinning]="isSpinning"></vts-spin-basic>

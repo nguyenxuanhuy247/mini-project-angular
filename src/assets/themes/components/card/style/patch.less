@@ -1,0 +1,31 @@
+vts-card {
+  display: block;
+}
+vts-card-meta {
+  display: block;
+}
+vts-card-loading {
+  display: block;
+}
+vts-card-body {
+  display: block;
+}
+
+.@{card-prefix-cls}-cover-fluid {
+  &-body {
+    padding: 0;
+
+    &-meta {
+      padding: @card-horizontal-padding @card-horizontal-padding 1em @card-horizontal-padding;
+    }
+
+    &-cover > img {
+      border-radius: 0;
+    }
+  }
+
+  &-actions li {
+    padding-top: @card-horizontal-padding;
+    text-align: left;
+  }
+}

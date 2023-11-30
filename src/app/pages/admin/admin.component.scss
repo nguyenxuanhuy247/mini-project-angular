@@ -1,0 +1,23 @@
+.add-new-button-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 16px;
+}
+
+.count-container {
+  padding: 12px 16px;
+  border: 1px solid #7fb7f2;
+  background: #edf6ff;
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.clear-btn {
+  color: #0663c7;
+}
+
+.range-container {
+  font-size: 14px;
+  color: #73777a;
+}

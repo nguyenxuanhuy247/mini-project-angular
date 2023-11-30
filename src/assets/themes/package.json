@@ -1,0 +1,75 @@
+{
+  "_args": [
+    [
+      "@ui-vts/theme@1.1.5-rc.4",
+      "D:\\mini-project-angular"
+    ]
+  ],
+  "_from": "@ui-vts/theme@1.1.5-rc.4",
+  "_id": "@ui-vts/theme@1.1.5-rc.4",
+  "_inBundle": false,
+  "_integrity": "sha512-djo/bvU6VIS21uSPbdTQTRsA0sSsUdzXS1J8Elj8gmFsVoHsYw7HZxI5UPO+RJ74gUWD11ph9FsD+dmKduLpQA==",
+  "_location": "/@ui-vts/theme",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "version",
+    "registry": true,
+    "raw": "@ui-vts/theme@1.1.5-rc.4",
+    "name": "@ui-vts/theme",
+    "escapedName": "@ui-vts%2ftheme",
+    "scope": "@ui-vts",
+    "rawSpec": "1.1.5-rc.4",
+    "saveSpec": null,
+    "fetchSpec": "1.1.5-rc.4"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/@ui-vts/theme/-/theme-1.1.5-rc.4.tgz",
+  "_spec": "1.1.5-rc.4",
+  "_where": "D:\\mini-project-angular",
+  "author": {
+    "name": "Viettel Solutions"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  },
+  "description": "Styling for UI Library",
+  "es2020": "fesm2020/ui-vts-theme.mjs",
+  "esm2020": "esm2020/ui-vts-theme.mjs",
+  "exports": {
+    "./package.json": {
+      "default": "./package.json"
+    },
+    ".": {
+      "types": "./index.d.ts",
+      "esm2020": "./esm2020/ui-vts-theme.mjs",
+      "es2020": "./fesm2020/ui-vts-theme.mjs",
+      "es2015": "./fesm2015/ui-vts-theme.mjs",
+      "node": "./fesm2015/ui-vts-theme.mjs",
+      "default": "./fesm2020/ui-vts-theme.mjs"
+    },
+    "./services": {
+      "types": "./services/index.d.ts",
+      "esm2020": "./esm2020/services/ui-vts-theme-services.mjs",
+      "es2020": "./fesm2020/ui-vts-theme-services.mjs",
+      "es2015": "./fesm2015/ui-vts-theme-services.mjs",
+      "node": "./fesm2015/ui-vts-theme-services.mjs",
+      "default": "./fesm2020/ui-vts-theme-services.mjs"
+    }
+  },
+  "fesm2015": "fesm2015/ui-vts-theme.mjs",
+  "fesm2020": "fesm2020/ui-vts-theme.mjs",
+  "license": "Viettel Solutions",
+  "module": "fesm2015/ui-vts-theme.mjs",
+  "name": "@ui-vts/theme",
+  "peerDependencies": {
+    "@angular/common": ">=14",
+    "@angular/core": ">=14",
+    "@angular/platform-browser": ">=14",
+    "rxjs": "*"
+  },
+  "sideEffects": false,
+  "typings": "index.d.ts",
+  "version": "1.1.5-rc.4"
+}

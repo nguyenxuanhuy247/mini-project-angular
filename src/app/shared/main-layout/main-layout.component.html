@@ -1,0 +1,98 @@
+<vts-layout>
+  <!-- Header -->
+  <vts-space vtsAlign="center" vtsJustify="end" class="header-container">
+    <vts-header class="header">
+      <a routerLink="/" class="logo-link">
+        <img
+          vts-image
+          appLogoSrc
+          vtsShape="square"
+          alt="Viettel Solutions Logo"
+          class="logo"
+        />
+      </a>
+    </vts-header>
+
+    <vts-space
+      vtsPreset="2"
+      vtsAlign="center"
+      class="action-buttons"
+      *ngIf="!loginStatus"
+    >
+      <a
+        routerLink="/log-in"
+        *vtsSpaceItem
+        vts-button
+        vtsType="primary"
+        class="btn"
+      >
+        Đăng nhập
+      </a>
+      <a
+        routerLink="/sign-up"
+        *vtsSpaceItem
+        vts-button
+        vtsType="default"
+        class="btn"
+        >Đăng ký</a
+      >
+    </vts-space>
+    <span *ngIf="loginStatus" class="welcomed"
+      >Chào {{ userData.email | getUsername }}</span
+    >
+  </vts-space>
+
+  <!-- Content -->
+  <vts-content class="content">
+    <vts-layout class="inner-layout">
+      <!-- Sider -->
+      <vts-sider vtsWidth="300px">
+        <ul vts-menu vtsMode="inline">
+          <a routerLink="/home" class="link">
+            <li
+              vts-menu-item
+              routerLinkActive="vts-menu-item-selected"
+              [routerLinkActiveOptions]="{ exact: true }"
+            >
+              <i vts-icon vtsType="Home:vts"></i>
+              Trang chủ
+            </li>
+          </a>
+          <a [routerLink]="['/user']">
+            <li vts-menu-item routerLinkActive="vts-menu-item-selected">
+              <i vts-icon vtsType="UserDoutone:vts"></i>
+              Trang user
+            </li></a
+          >
+          <a routerLink="/admin">
+            <li vts-menu-item routerLinkActive="vts-menu-item-selected">
+              <i vts-icon vtsType="ManageAccounts:vts"></i>
+              Trang admin
+            </li></a
+          >
+          <ul
+            vts-submenu
+            vtsTitle="Cài đặt"
+            vtsIcon="Settings"
+            *ngIf="loginStatus"
+          >
+            <li vts-menu-item (click)="logOut()">Đăng xuất</li>
+            <li vts-menu-item (click)="deleteAccount()">Xóa tài khoản</li>
+          </ul>
+        </ul>
+      </vts-sider>
+
+      <!-- Content -->
+      <vts-content>
+        <ng-content></ng-content>
+      </vts-content>
+    </vts-layout>
+  </vts-content>
+
+  <!-- Footer -->
+  <vts-footer>
+    <div vts-typo vtsAlign="center">© Viettel Bussiness Solutions</div>
+  </vts-footer>
+</vts-layout>
+
+<vts-spin-basic [isSpinning]="isSpinning"></vts-spin-basic>

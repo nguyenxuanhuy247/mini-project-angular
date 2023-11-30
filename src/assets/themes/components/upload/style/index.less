@@ -1,0 +1,298 @@
+@import '../../../style/mixins/index';
+@import (reference) '../../typography/style/index';
+
+@upload-prefix-cls: ~'@{vts-prefix}-upload';
+@upload-item: ~'@{vts-prefix}-upload-list-item';
+
+.@{upload-prefix-cls} {
+  .reset-component();
+  outline: 0;
+
+  &-btn {
+    display: inline-block;
+    outline: none;
+  }
+
+  &-block &-btn {
+    display: block;
+  }
+
+  input[type='file'] {
+    cursor: pointer;
+  }
+
+  &&-select {
+    display: block;
+  }
+
+  &&-disabled {
+    cursor: not-allowed;
+  }
+
+  &&-drag {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    background: @upload-bg-drag;
+    border: @upload-border-drag;
+    border-radius: @border-radius-base;
+    cursor: pointer;
+    transition: border-color 0.3s;
+    padding: 16px;
+
+    &.@{upload-prefix-cls}-drag-hover:not(.@{upload-prefix-cls}-disabled) {
+      background: @upload-bg-drag-hover;
+      border: @upload-border-drag-hover;
+    }
+
+    &.@{upload-prefix-cls}-disabled {
+      cursor: not-allowed;
+    }
+
+    &:not(.@{upload-prefix-cls}-disabled):not(.@{upload-prefix-cls}-drag-mute-dialog):hover {
+      border-color: @primary-1;
+    }
+
+    p.@{upload-prefix-cls}-drag-icon {
+      .@{iconfont-css-prefix} {
+        color: @primary-1;
+        font-size: 61px;
+      }
+
+      margin-bottom: 5px;
+    }
+
+    p.@{upload-prefix-cls}-text {
+      margin: 0 0 4px;
+      color: @heading-color;
+      font-size: @font-size-lg;
+    }
+
+    p.@{upload-prefix-cls}-hint {
+      color: @text-color-secondary;
+      font-size: @font-size-base;
+    }
+
+    .@{iconfont-css-prefix}-plus {
+      color: @disabled-color;
+      font-size: 30px;
+      transition: all 0.3s;
+
+      &:hover {
+        color: @text-color-secondary;
+      }
+    }
+
+    &:hover .@{iconfont-css-prefix}-plus {
+      color: @text-color-secondary;
+    }
+
+    &&-mute-dialog {
+      cursor: default;
+    }
+  }
+}
+
+.@{upload-prefix-cls}-list {
+  .reset-component();
+  .clearfix();
+  line-height: @line-height-base;
+  display: block;
+
+  .@{upload-prefix-cls}+& {
+    margin-top: 16px;
+  }
+
+  &-title {
+    .sub2();
+    background: @upload-title-bg;
+    color: @upload-title-color;
+    display: flex;
+    align-items: center;
+    padding: 8px @upload-row-horizontal-padding;
+  }
+
+  // ============================ Row =============================
+  &-row-container {
+    .@{upload-item} {
+      display: flex;
+      align-items: center;
+      flex-wrap: nowrap;
+      padding: @upload-row-item-padding;
+      border-bottom: @border-width-base @border-style-base rgba(0, 0, 0, .05);
+
+      &-illustrate {
+        height: @upload-row-placeholder-size;
+        width: @upload-row-placeholder-size;
+        border-radius: @upload-row-placeholder-border-radius;
+        background: @upload-row-placeholder-bg;
+        margin-right: @upload-row-item-spacing;
+      }
+
+      &-info {
+        flex: 1 1 auto;
+      }
+
+      &-title-row {
+        display: flex;
+
+        .name {
+          flex: auto;
+          padding: 0;
+          line-height: 24px;
+          color: @upload-row-color-name;
+
+          &.uploaded {
+            color: @upload-row-color-name-uploaded;
+          }
+        }
+      }
+
+      &-progress-row {
+        .@{vts-prefix}-progress-inner {
+          background: @upload-progress-track;
+        }
+
+        .@{vts-prefix}-progress-bg {
+          background: @upload-progress-bg;
+        }
+      }
+
+      &-description-row {
+        .size {
+          .body2();
+          color: @grey-1;
+        }
+
+        .error {
+          color: @error-color;
+        }
+      }
+
+      &-actions {
+        margin-left: @upload-row-item-spacing;
+      }
+
+
+      .@{upload-prefix-cls}-action-icon {
+        color: @upload-row-actions-color;
+        font-size: 20px;
+        cursor: pointer;
+
+        &:hover {
+          color: @upload-row-actions-active-color;
+        }
+      }
+    }
+  }
+
+  // ======================== Gallery ========================
+  &-gallery-container {
+    display: flex;
+    flex-wrap: wrap;
+    margin: -(@upload-gallery-spacing / 2);
+
+    .@{upload-prefix-cls}-list-title+& {
+      margin-top: 8px;
+    }
+
+    .@{upload-item} {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      width: @upload-gallery-size;
+      height: @upload-gallery-size;
+      min-width: @upload-gallery-size;
+      min-height: @upload-gallery-size;
+      vertical-align: top;
+      position: relative;
+      padding: @upload-gallery-padding;
+      border: @upload-gallery-border;
+      border-radius: @upload-gallery-border-radius;
+      margin: (@upload-gallery-spacing / 2);
+
+      &-thumbnail {
+
+        &,
+        & img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+
+      &-backdrop {
+        position: absolute;
+        z-index: 1;
+        top: @upload-gallery-padding;
+        left: @upload-gallery-padding;
+        right: @upload-gallery-padding;
+        bottom: @upload-gallery-padding;
+        background-color: fade(@black, 50%);
+        opacity: 0;
+        transition: all 0.3s;
+      }
+
+      &-progress-row {
+        width: 100%;
+        text-align: center;
+        user-select: none;
+
+        .@{vts-prefix}-progress-inner {
+          background: @upload-progress-track;
+        }
+
+        .@{vts-prefix}-progress-bg {
+          background: @upload-progress-bg;
+        }
+
+        >span {
+          .body2();
+          color: @text-color-secondary;
+        }
+      }
+
+      &-error {
+        border-color: @error-color;
+      }
+
+      &-error-row {
+        font-size: 24px;
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        color: @error-color;
+      }
+    }
+
+    .@{upload-item}:hover .@{upload-item}-backdrop {
+      opacity: 1;
+    }
+
+    .@{upload-item}-actions {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      z-index: 10;
+      white-space: nowrap;
+      transform: translate(-50%, -50%);
+      opacity: 0;
+      transition: all 0.3s;
+
+      .@{upload-prefix-cls}-action-icon {
+        color: @upload-gallery-actions-color;
+        font-size: 20px;
+        cursor: pointer;
+
+        &:hover {
+          color: @upload-gallery-actions-active-color;
+        }
+      }
+    }
+
+    .@{upload-item}:hover .@{upload-item}-actions {
+      opacity: 1;
+    }
+  }
+}

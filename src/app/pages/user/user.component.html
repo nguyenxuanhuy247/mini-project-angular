@@ -1,0 +1,99 @@
+<app-main-layout>
+  <p
+    vts-typography
+    vtsType="h1"
+    vtsColor="default"
+    vtsAlign="center"
+    vtsWeight="semi-bold"
+  >
+    DANH SÁCH THÀNH VIÊN NHÓM
+  </p>
+  <div class="add-new-button-container">
+    <app-add-new-drawer
+      (spinnerAndFetch)="turnOnSpinnerAndFetchAllMembers($event)"
+      [openEdit]="isOpenEdit"
+      (closeEdit)="closeEditMemeber()"
+      [memberData]="memberData"
+    ></app-add-new-drawer>
+  </div>
+
+  <vts-table
+    [vtsData]="allMembersArray"
+    [vtsPageSize]="10"
+    [(vtsPageIndex)]="pageIndex"
+    vtsShowPagination
+    vtsShowSizeChanger
+    [vtsStripe]="false"
+    [vtsBordered]="false"
+    [vtsShowTotal]="rangeTemplate"
+    vtsOuterBordered
+    #t="vtsTable"
+    [vtsLoadingIndicator]="spinner"
+    [vtsLoading]="isSpinning"
+  >
+    <thead>
+      <tr>
+        <th vtsWidth="50px" vtsAlign="center" vts>STT</th>
+        <th vtsAlign="center">Họ và tên</th>
+        <th vtsAlign="center">Email</th>
+        <th vtsAlign="center">Địa chỉ</th>
+        <th vtsWidth="120px" vtsAlign="center">Tình trạng hôn nhân</th>
+        <th vtsWidth="100px" vtsAlign="center">Hành động</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of t.data; index as index">
+        <td vtsAlign="center" vtsWidth="50px">{{ index + 1 }}</td>
+        <td vtsNoWrap>{{ item.name }}</td>
+        <td>{{ item.email }}</td>
+        <td>{{ item.address }}</td>
+        <td vtsAlign="center" vtsWidth="120px">
+          <ng-container
+            *ngTemplateOutlet="
+              statusTpl;
+              context: { $implicit: item.marriageStatus }
+            "
+          ></ng-container>
+        </td>
+        <td vtsWidth="100px" vtsAlign="center">
+          <vts-space [vtsSize]="8">
+            <button
+              *vtsSpaceItem
+              vts-button
+              vtsType="default"
+              (click)="onEditMember(item)"
+            >
+              <i vts-icon vtsType="Edit-1:vts"></i>
+            </button>
+            <button
+              *vtsSpaceItem
+              vts-button
+              vtsType="default"
+              (click)="onDeleteMember(item.id)"
+            >
+              <i vts-icon vtsType="DeleteOutline:antd"></i>
+            </button>
+          </vts-space>
+        </td>
+      </tr>
+    </tbody>
+  </vts-table>
+
+  <ng-template #rangeTemplate let-range="range" let-total>
+    <div class="range-container">
+      {{ range[0] }}-{{ range[1] }} of {{ total }} items
+    </div>
+  </ng-template>
+
+  <ng-template #statusTpl let-status>
+    <vts-tag *ngIf="status === 'Married'" vtsPreset="success">
+      Đã kết hôn</vts-tag
+    >
+    <vts-tag *ngIf="status === 'Single'" vtsPreset="warning">Độc thân</vts-tag>
+  </ng-template>
+</app-main-layout>
+
+<!-- Spinner -->
+<ng-template #spinner>
+  <vts-spin-basic [isSpinning]="true"></vts-spin-basic
+></ng-template>

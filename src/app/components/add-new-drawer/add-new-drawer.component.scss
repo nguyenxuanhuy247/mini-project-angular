@@ -1,0 +1,18 @@
+.vts-space,
+.vts-space-item {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.label {
+  width: 100px;
+  text-align: left;
+
+  &.marriage-status {
+    width: 200px;
+  }
+}
+
+.container {
+  position: relative;
+}
